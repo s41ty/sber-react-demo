@@ -1,0 +1,1 @@
+export const SBER_TOKEN = "ваш_токен_из_студии"
