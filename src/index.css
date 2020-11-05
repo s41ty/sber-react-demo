@@ -26,8 +26,9 @@ body > #root > #background {
 #container {
   height: 80vh;
   width: 80vw;
-  display: flex;
+  overflow: auto; 
+  /* display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: center; */
 }
   

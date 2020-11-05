@@ -6,10 +6,10 @@ import { SBER_TOKEN } from './token.js';
 import './App.css';
 
 class App extends React.Component {
-  
+
   constructor(props) {
     super(props);
-    this.state = { commandString: "HEY!" };
+    this.state = { commands: ["Starting..."] };
   }
 
   componentDidMount() {
@@ -27,12 +27,16 @@ class App extends React.Component {
   
     assistant.on('start', () => {
       console.log(`start`);
-      this.setState({ commandString: this.state.commandString.concat(' /// ', 'READY') });
+      let state = this.state;
+      state.commands.push('Connected...');
+      this.setState(state);
     });
 
     assistant.on('data', (command) => {
       console.log(`command: ${JSON.stringify(command)}`);
-      this.setState({ commandString: this.state.commandString.concat(' /// ', JSON.stringify(command)) });
+      let state = this.state;
+      state.commands.push(JSON.stringify(command));
+      this.setState(state);
 
       if (command.navigation) {
         switch(command.navigation.command) {
@@ -56,7 +60,13 @@ class App extends React.Component {
   }
 
   render() {
-    return <div id="background"><div id="container">{this.state.commandString}</div></div>;
+    return <div id="background">
+             <div id="container">
+             {this.state.commands.map(command => (
+               <li>{command}</li>
+             ))}
+             </div>
+           </div>;
   }
 }
 
