@@ -2,7 +2,6 @@
 
 import React from 'react';
 import { createAssistant, createSmartappDebugger } from '@sberdevices/assistant-client';
-import { SBER_TOKEN } from './token.js';
 import './App.css';
 
 class App extends React.Component {
@@ -18,7 +17,7 @@ class App extends React.Component {
     
     const initialize = (getState, getRecoveryState) => {
       if (process.env.NODE_ENV === 'development') {
-          return createSmartappDebugger({ token: SBER_TOKEN, initPhrase: 'Запусти попкорн', getState, getRecoveryState });
+          return createSmartappDebugger({ token: process.env.REACT_APP_SBER_TOKEN, initPhrase: 'Запусти попкорн', getState, getRecoveryState });
       }
       return createAssistant({ getState, getRecoveryState });
     };
@@ -62,9 +61,11 @@ class App extends React.Component {
   render() {
     return <div id="background">
              <div id="container">
-             {this.state.commands.map(command => (
-               <li>{command}</li>
-             ))}
+               <ul>
+                {this.state.commands.map(command => (
+                  <li key={this.state.commands.indexOf(command)}>{command}</li>
+                ))}
+              </ul>
              </div>
            </div>;
   }

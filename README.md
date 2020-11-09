@@ -1,6 +1,6 @@
 # SberReactDemo
 
-Copy your token from: https://smartapp-studio.sberdevices.ru/ to "src/token.js"
+Copy your token from: https://smartapp-studio.sberdevices.ru/ to ".env"
 
 Install dependency:
 ```
