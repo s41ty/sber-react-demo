@@ -1,6 +1,7 @@
 # SberReactDemo
 
-Copy your token from: https://smartapp-studio.sberdevices.ru/ to ".env"
+Copy your token from: https://smartapp-studio.sberdevices.ru/ to ".env" (REACT_APP_SBER_TOKEN)
+Add your smart app name to .env (REACT_APP_SMARTAPP)
 
 Install dependency:
 ```
