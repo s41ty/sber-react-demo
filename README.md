@@ -1,4 +1,4 @@
-# SberReactDemo
+# sber-react-demo
 
 Copy your token from: https://smartapp-studio.sberdevices.ru/ to ".env" (REACT_APP_SBER_TOKEN)
 
