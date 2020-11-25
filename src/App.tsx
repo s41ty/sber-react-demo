@@ -135,7 +135,7 @@ export const App: FC = memo(() => {
       })()}
       <DocStyle />
       <Paragraph>1.0.0</Paragraph>
-      <CommandButton onClick={() => handleOnClick()}>send data</CommandButton>
+      <CommandButton view="primary" onClick={() => handleOnClick()}>send data</CommandButton>
       <ul>
         {commands.map((command, index)  => (
           <li key={index}>{command}</li>
