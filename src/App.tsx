@@ -7,6 +7,8 @@ import { Button } from '@sberdevices/ui/components/Button';
 import { detectDevice } from '@sberdevices/ui/utils';
 import styled, { createGlobalStyle } from 'styled-components';
 
+import { MarketPage } from './MarketPage';
+
 const ThemeBackgroundEva = createGlobalStyle(darkEva);
 const ThemeBackgroundSber = createGlobalStyle(darkSber);
 const ThemeBackgroundJoy = createGlobalStyle(darkJoy);
@@ -25,6 +27,13 @@ const CommandButton = styled(Button)`
   left: 20px;
 `;
 
+const CardButton = styled(Button)`
+  margin: 0px;
+  position: absolute;
+  top: 20px;
+  left: 180px;
+`;
+
 const Paragraph = styled.p`
   color: rgb(255, 255, 255, 0.5);
   font-size: 1em;
@@ -41,9 +50,6 @@ const DocStyle = createGlobalStyle`
     background-color: ${background};
     background-image: ${gradient};
     min-height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
   }
   `;
 
@@ -61,6 +67,7 @@ const initializeAssistant = (getState: any) => {
 export const App: FC = memo(() => {
   const [character, setCharacter] = useState("sber" as AssistantCharacterType);
   const [commands, setCommands] = useState(["Starting..."]);
+  const [card, setCard] = useState(false);
 
   const assistantStateRef = useRef<AssistantAppState>();
   const assistantRef = useRef<ReturnType<typeof createAssistant>>();
@@ -76,8 +83,6 @@ export const App: FC = memo(() => {
   const handleOnClick = () => {
     sendCommand("hello", { "text": "world"});
   };
-
-
   useEffect(() => {
     assistantRef.current = initializeAssistant(() => assistantStateRef.current);
     assistantRef.current.on("start", () => {
@@ -133,16 +138,24 @@ export const App: FC = memo(() => {
             return;
         }
       })()}
-      <DocStyle />
+      <DocStyle/>
+
       <Paragraph>1.0.0</Paragraph>
       <CommandButton view="primary" onClick={() => handleOnClick()}>send data</CommandButton>
-      <ul>
-        {commands.map((command, index)  => (
-          <li key={index}>{command}</li>
-        ))}
-      </ul>
+      <CardButton view="primary" onClick={() => setCard(!card)}>{card ? "hide cards" : "show cards"}  </CardButton>
 
-
+      <div className="container">
+        {card &&
+          <MarketPage />
+        }
+        {!card &&
+          <ul className="command">
+          {commands.map((command, index)  => (
+            <li key={index}>{command}</li>
+          ))}
+        </ul>
+        }
+      </div>
     </AppStyle>
   );
 });
