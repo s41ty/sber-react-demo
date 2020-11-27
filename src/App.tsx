@@ -18,21 +18,11 @@ const TypoScaleTouch = createGlobalStyle(touch);
 
 const AppStyle = styled.div`
     ${body1}
-`;
+  `;
 
-const CommandButton = styled(Button)`
-  margin: 0px;
-  position: absolute;
-  top: 20px;
-  left: 20px;
-`;
-
-const CardButton = styled(Button)`
-  margin: 0px;
-  position: absolute;
-  top: 20px;
-  left: 180px;
-`;
+const AppButton = styled(Button)`
+  margin: 20px;
+ `;
 
 const Paragraph = styled.p`
   color: rgb(255, 255, 255, 0.5);
@@ -115,7 +105,15 @@ export const App: FC = memo(() => {
   return (
     <AppStyle>
       {(() => {
-        switch (detectDevice()) {
+        let device = detectDevice();
+
+        // device = "sberBox" as "sberPortal" | "sberBox" | "touch";
+        // is for testing only
+        // detectDevice() returns "touch" for local run
+        // ... or change user-agent in browser
+        device = "sberBox" as "sberPortal" | "sberBox" | "touch"; 
+
+        switch (device) {
           case "sberBox":
             return <TypoScaleSberBox />
           case "sberPortal": 
@@ -141,8 +139,9 @@ export const App: FC = memo(() => {
       <DocStyle/>
 
       <Paragraph>1.0.0</Paragraph>
-      <CommandButton view="primary" onClick={() => handleOnClick()}>send data</CommandButton>
-      <CardButton view="primary" onClick={() => setCard(!card)}>{card ? "hide cards" : "show cards"}  </CardButton>
+
+      <AppButton view="primary" onClick={() => handleOnClick()}>send data</AppButton>
+      <AppButton view="primary" onClick={() => setCard(!card)}>{card ? "hide cards" : "show cards"}</AppButton>
 
       <div className="container">
         {card &&
@@ -156,6 +155,7 @@ export const App: FC = memo(() => {
         </ul>
         }
       </div>
+
     </AppStyle>
   );
 });
