@@ -1,26 +1,26 @@
 import { useEffect } from 'react';
 
-export type KeyboardKey = 'UP' | 'DOWN' | 'LEFT' | 'RIGHT' | 'OK';
-export type KeyboardCallback = (key: KeyboardKey) => any;
+export type RemoteKey = 'UP' | 'DOWN' | 'LEFT' | 'RIGHT' | 'OK';
+export type RemoteCallback = (key: RemoteKey) => any;
 
-export const useKeyboard = (onKeyboard: KeyboardCallback) => {
+export const useRemote = (onRemote: RemoteCallback) => {
   useEffect(() => {
     const handleKeyboard = (event: KeyboardEvent): any => {
       switch( event.key ) {
         case "ArrowUp": // 38
-          onKeyboard('UP');
+          onRemote('UP');
           break;
         case "ArrowDown": // 40
-          onKeyboard('DOWN');
+          onRemote('DOWN');
           break;  
         case "ArrowLeft": // 37
-          onKeyboard('LEFT');
+          onRemote('LEFT');
           break;
         case "ArrowRight": // 39
-          onKeyboard('RIGHT');
+          onRemote('RIGHT');
           break;
         case "Enter": //13
-          onKeyboard('OK');
+          onRemote('OK');
           break;  
         default: 
           break;
@@ -30,5 +30,5 @@ export const useKeyboard = (onKeyboard: KeyboardCallback) => {
     return () => {
         window.removeEventListener('keydown', handleKeyboard);
     };
-  }, [onKeyboard]);
+  }, [onRemote]);
 }

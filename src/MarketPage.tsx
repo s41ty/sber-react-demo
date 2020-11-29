@@ -6,7 +6,7 @@ import { Carousel } from '@sberdevices/ui/components/Carousel/Carousel';
 import { CarouselGridCol } from '@sberdevices/ui/components/Carousel/CarouselGridCol';
 
 import { ImagePlaceholder } from './ImagePlaceholder';
-import { useKeyboard, KeyboardKey } from './useKeyboard';
+import { useRemote,RemoteKey } from './useRemote';
 
 export const MarketPage = () => {
     const items = Array(Number(10)).fill(0);
@@ -15,7 +15,7 @@ export const MarketPage = () => {
     const handlePrev = () => setIndex(Math.max(index - 1, 0));
     const handleNext = () => setIndex(Math.min(index + 1, items.length - 1));
 
-    useKeyboard((key: KeyboardKey) => {
+    useRemote((key: RemoteKey) => {
       switch(key) {
         case 'LEFT':
           handlePrev();
